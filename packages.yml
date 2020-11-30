@@ -1,3 +1,5 @@
 packages:
   - git: "https://github.com/fivetran/dbt_pardot_source.git"
     revision: main
+
+  # - local: ../pardot_source

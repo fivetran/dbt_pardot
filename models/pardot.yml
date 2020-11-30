@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: pardot__campaigns
+    columns:
+      - name: campaign_id
+        tests:
+          - unique
+          - not_null
+  - name: pardot__lists
+    columns:
+      - name: list_id
+        tests:
+          - unique
+          - not_null
+  - name: pardot__opportunities
+    columns:
+      - name: opportunity_id
+        tests:
+          - unique
+          - not_null
+  - name: pardot__prospects
+    columns:
+      - name: prospect_id
+        tests:
+          - unique
+          - not_null

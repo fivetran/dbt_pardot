@@ -24,7 +24,7 @@ with campaigns as (
 ), joined as (
 
     select *
-    from prospects
+    from campaigns
     left join opportunities
         using (campaign_id)
     left join prospects_xf
