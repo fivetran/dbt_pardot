@@ -1,13 +1,80 @@
-Welcome to your new dbt project!
+# Pardot 
 
-### Using the starter project
+This package models Pardot data from [Fivetran's connector](https://fivetran.com/docs/applications/pardot). It uses data in the format described by [the Pardot ERD](https://docs.google.com/presentation/d/1YQquOmlb7pIMI1Tcc2Qcner4rSCI8RYdrie1DRkJzds/edit#slide=id.g244d368397_0_1).
 
-Try running the following commands:
-- dbt run
-- dbt test
+This package enables you to better understand your Pardot prospect, opportunity, list and campaign performance. It includes analysis-ready models, enriched with relevant metrics.
+
+## Models
+
+This package contains transformation models, designed to work simultaneously with our [Pardot source package](https://github.com/fivetran/dbt_pardot_source). A depenedency on the source package is declared in this package's `packages.yml` file, so it will automatically download when you run `dbt deps`. The primary outputs of this package are described below. Intermediate models are used to create these output models.
+
+| **model**                | **description**                                                                                                     |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| pardot__campaigns        | Each record represents a campaign in Pardot, enriched with metrics about associated prospects.                      |
+| pardot__lists            | Each record represents a list in Pardot, enriched with metrics about associated prospect activity.                  |
+| pardot__opportunities    | Each record represents a opportunity in Pardot, enriched with metrics about associated prospects.                   |
+| pardot__prospects        | Each record represents a prospects in Pardot, enriched with metrics about associated prospect activity.             |
 
 
-### Resources:
+## Installation Instructions
+Check [dbt Hub](https://hub.getdbt.com/) for the latest installation instructions, or [read the dbt docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
+
+## Configuration
+
+### Source data location
+
+By default this package will look for your Pardot data in the `pardot` schema of your [target database](https://docs.getdbt.com/docs/running-a-dbt-project/using-the-command-line-interface/configure-your-profile). If this is not where your Pardot data is, add the following configuration to your `dbt_project.yml` file:
+
+```yml
+# dbt_project.yml
+
+...
+config-version: 2
+
+vars:
+  pardot_source:
+    pardot_database: your_database_name
+    pardot_schema: your_schema_name 
+```
+
+### Passthrough Columns
+
+By default, the package includes all the standard columns in the `stg_pardot__prospect` model. If you would like to include custom columns to be included, you can configure them using the `prospect_passthrough_columns` variable:
+
+```yml
+# dbt_project.yml
+
+...
+vars:
+  pardot_source:
+    prospect_passthrough_columns: ["custom_creative","custom_contact_state"]
+```
+
+### Additional metrics
+
+This packages aggreagates and joins activity data onto the prospect model. By default, it does so for email and visit events. If you would like to have aggregates for other events in the `visitor_activity` table, you can see them with the `prospect_metrics_activity_types` variable. You need to use value from the `type_name` column:
+
+```yml
+# dbt_project.yml
+
+...
+vars:
+  pardot_source:
+    prospect_metrics_activity_types: ["Form Handler","Webinar"]
+```
+
+
+## Contributions
+
+Additional contributions to this package are very welcome! Please create issues
+or open PRs against `master`. Check out 
+[this post](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657) 
+on the best workflow for contributing to a package.
+
+## Resources:
+- Find all of Fivetran's pre-built dbt packages in our [dbt hub](https://hub.getdbt.com/fivetran/)
+- Learn more about Fivetran [here](https://fivetran.com/docs)
+- Check out [Fivetran's blog](https://fivetran.com/blog)
 - Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
 - Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
 - Join the [chat](http://slack.getdbt.com/) on Slack for live discussions and support
