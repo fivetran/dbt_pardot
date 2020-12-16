@@ -19,3 +19,4 @@ vars:
     prospect: "{{ ref('stg_pardot__prospect') }}"
     visitor_activity: "{{ ref('stg_pardot__visitor_activity') }}"
     visitor: "{{ ref('stg_pardot__visitor') }}"
+    prospect_metrics_activity_types: []

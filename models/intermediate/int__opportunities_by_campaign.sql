@@ -12,7 +12,8 @@ with opportunities as (
         count(*) as count_opportunities,
 
         {% for status in statuses %}
-        count(case when opportunity_status = '{{ status }}' then 1 end) as count_opportunities_{{ status|lower|replace(' ','_') }}
+        count(case when opportunity_status = '{{ status }}' then 1 end) as count_opportunities_{{ status|lower|replace(' ','_') }},
+        sum(case when opportunity_status = '{{ status }}' then amount end) as sum_opportunity_amount_{{ status|lower|replace(' ','_') }}
         {% if not loop.last %} , {% endif %}
         {% endfor %}
     
