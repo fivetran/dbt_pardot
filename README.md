@@ -2,18 +2,18 @@
 
 This package models Pardot data from [Fivetran's connector](https://fivetran.com/docs/applications/pardot). It uses data in the format described by [the Pardot ERD](https://docs.google.com/presentation/d/1YQquOmlb7pIMI1Tcc2Qcner4rSCI8RYdrie1DRkJzds/edit#slide=id.g244d368397_0_1).
 
-This package enables you to better understand your Pardot prospect, opportunity, list and campaign performance. It includes analysis-ready models, enriched with relevant metrics.
+This package enables you to better understand your Pardot prospects, opportunities, lists, and campaign performance. It includes analysis-ready models, enriched with relevant metrics.
 
 ## Models
 
-This package contains transformation models, designed to work simultaneously with our [Pardot source package](https://github.com/fivetran/dbt_pardot_source). A depenedency on the source package is declared in this package's `packages.yml` file, so it will automatically download when you run `dbt deps`. The primary outputs of this package are described below. Intermediate models are used to create these output models.
+This package contains transformation models, designed to work simultaneously with our [Pardot source package](https://github.com/fivetran/dbt_pardot_source). A dependency on the source package is declared in this package's `packages.yml` file, so it will automatically download when you run `dbt deps`. The primary outputs of this package are described below. Intermediate models are used to create these output models.
 
 | **model**                | **description**                                                                                                     |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------- |
 | pardot__campaigns        | Each record represents a campaign in Pardot, enriched with metrics about associated prospects.                      |
 | pardot__lists            | Each record represents a list in Pardot, enriched with metrics about associated prospect activity.                  |
-| pardot__opportunities    | Each record represents a opportunity in Pardot, enriched with metrics about associated prospects.                   |
-| pardot__prospects        | Each record represents a prospects in Pardot, enriched with metrics about associated prospect activity.             |
+| pardot__opportunities    | Each record represents an opportunity in Pardot, enriched with metrics about associated prospects.                   |
+| pardot__prospects        | Each record represents a prospect in Pardot, enriched with metrics about associated prospect activity.             |
 
 
 ## Installation Instructions
@@ -23,7 +23,7 @@ Check [dbt Hub](https://hub.getdbt.com/) for the latest installation instruction
 
 ### Source data location
 
-By default this package will look for your Pardot data in the `pardot` schema of your [target database](https://docs.getdbt.com/docs/running-a-dbt-project/using-the-command-line-interface/configure-your-profile). If this is not where your Pardot data is, add the following configuration to your `dbt_project.yml` file:
+By default, this package will look for your Pardot data in the `pardot` schema of your [target database](https://docs.getdbt.com/docs/running-a-dbt-project/using-the-command-line-interface/configure-your-profile). If this is not where your Pardot data is, add the following configuration to your `dbt_project.yml` file:
 
 ```yml
 # dbt_project.yml
@@ -39,7 +39,7 @@ vars:
 
 ### Passthrough Columns
 
-By default, the package includes all the standard columns in the `stg_pardot__prospect` model. If you would like to include custom columns to be included, you can configure them using the `prospect_passthrough_columns` variable:
+By default, the package includes all of the standard columns in the `stg_pardot__prospect` model. If you want to include custom columns, configure them using the `prospect_passthrough_columns` variable:
 
 ```yml
 # dbt_project.yml
@@ -52,7 +52,7 @@ vars:
 
 ### Additional metrics
 
-This packages aggreagates and joins activity data onto the prospect model. By default, it does so for email and visit events. If you would like to have aggregates for other events in the `visitor_activity` table, you can see them with the `prospect_metrics_activity_types` variable. You need to use value from the `type_name` column:
+By default, this package aggregates and joins activity data onto the prospect model for email and visit events. If you want to have aggregates for other events in the `visitor_activity` table, use `prospect_metrics_activity_types` variable to see them. Use the `type_name` column value:
 
 ```yml
 # dbt_project.yml
