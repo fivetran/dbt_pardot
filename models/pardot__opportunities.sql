@@ -28,4 +28,4 @@ with opportunities as (
 )
 
 select *
-from opportunities
+from joined

@@ -1,4 +1,4 @@
-# Pardot 
+# Pardot ([docs](https://fivetran-dbt-pardot.netlify.app/#!/overview))
 
 This package models Pardot data from [Fivetran's connector](https://fivetran.com/docs/applications/pardot). It uses data in the format described by [the Pardot ERD](https://docs.google.com/presentation/d/1YQquOmlb7pIMI1Tcc2Qcner4rSCI8RYdrie1DRkJzds/edit#slide=id.g244d368397_0_1).
 
@@ -52,15 +52,15 @@ vars:
 
 ### Additional metrics
 
-By default, this package aggregates and joins activity data onto the prospect model for email and visit events. If you want to have aggregates for other events in the `visitor_activity` table, use `prospect_metrics_activity_types` variable to see them. Use the `type_name` column value:
+By default, this package aggregates and joins activity data onto the prospect model for email and visit events. If you want to have aggregates for other events in the `visitor_activity` table, use `prospect_metrics_activity_types` variable to generate these aggregates. Use the `type_name` column value:
 
 ```yml
 # dbt_project.yml
 
 ...
 vars:
-  pardot_source:
-    prospect_metrics_activity_types: ["Form Handler","Webinar"]
+  pardot:
+    prospect_metrics_activity_types: ["form handler","webinar"]  
 ```
 
 
