@@ -19,6 +19,16 @@ models:
         description: Cost associated to the campaign
       - name: count_prospects
         description: Number of prospects associated with the campaign
+      - name: count_opportunities
+        description: Count of all campaign opportunities
+      - name: count_opportunities_won
+        description: Count of all campaign opportunities won
+      - name: sum_opportunity_amount_won
+        description: Sum of all campaign opportunities won
+      - name: count_opportunities_lost
+        description: Count of all campaign opportunities lost
+      - name: sum_opportunity_amount_lost
+        description: Sum of all campaign opportunities lost
 
   - name: pardot__lists
     description: Each record represents a list in Pardot.
@@ -102,6 +112,8 @@ models:
           - not_null
       - name: campaign_id
         description: Pardot ID of the campaign associated with this prospect
+      - name: user_id
+        description: Pardot ID of the user associated with this prospect
       - name: salutation
         description: Prospect's formal prefix
       - name: first_name
