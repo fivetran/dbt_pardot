@@ -10,10 +10,10 @@ This package contains transformation models, designed to work simultaneously wit
 
 | **model**                | **description**                                                                                                     |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------- |
-| pardot__campaigns        | Each record represents a campaign in Pardot, enriched with metrics about associated prospects.                      |
-| pardot__lists            | Each record represents a list in Pardot, enriched with metrics about associated prospect activity.                  |
-| pardot__opportunities    | Each record represents an opportunity in Pardot, enriched with metrics about associated prospects.                   |
-| pardot__prospects        | Each record represents a prospect in Pardot, enriched with metrics about associated prospect activity.             |
+| [pardot__campaigns](models/pardot__campaigns.sql)  )        | Each record represents a campaign in Pardot, enriched with metrics about associated prospects.                      |
+| [pardot__lists](models/pardot__lists.sql)            | Each record represents a list in Pardot, enriched with metrics about associated prospect activity.                  |
+| [pardot__opportunities](models/pardot__opportunities.sql)    | Each record represents an opportunity in Pardot, enriched with metrics about associated prospects.                   |
+| [pardot__prospects](models/pardot__prospects.sql)        | Each record represents a prospect in Pardot, enriched with metrics about associated prospect activity.             |
 
 
 ## Installation Instructions
@@ -63,6 +63,22 @@ vars:
     prospect_metrics_activity_types: ["form handler","webinar"]  
 ```
 
+### Changing the Build Schema
+By default this package will build the Pardot staging models within a schema titled (<target_schema> + `_stg_pardot`) and Pardot final models within a schema titled (<target_schema> + `pardot`) in your target database. If this is not where you would like your modeled Pardot data to be written to, add the following configuration to your `dbt_project.yml` file:
+
+```yml
+# dbt_project.yml
+
+...
+models:
+    pardot:
+      +schema: my_new_schema_name # leave blank for just the target_schema
+    pardot_source:
+      +schema: my_new_schema_name # leave blank for just the target_schema
+```
+
+## Database Support
+This package has been tested on BigQuery, Snowflake, Redshift, and Postgres.
 
 ## Contributions
 
@@ -72,11 +88,14 @@ or open PRs against `master`. Check out
 on the best workflow for contributing to a package.
 
 ## Resources:
+- Provide [feedback](https://www.surveymonkey.com/r/DQ7K7WW) on our existing dbt packages or what you'd like to see next
+- Have questions, feedback, or need help? Book a time during our office hours [using Calendly](https://calendly.com/fivetran-solutions-team/fivetran-solutions-team-office-hours) or email us at solutions@fivetran.com
 - Find all of Fivetran's pre-built dbt packages in our [dbt hub](https://hub.getdbt.com/fivetran/)
-- Learn more about Fivetran [here](https://fivetran.com/docs)
+- Learn how to orchestrate [dbt transformations with Fivetran](https://fivetran.com/docs/transformations/dbt)
+- Learn more about Fivetran overall [in our docs](https://fivetran.com/docs)
 - Check out [Fivetran's blog](https://fivetran.com/blog)
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
+- Learn more about dbt [in the dbt docs](https://docs.getdbt.com/docs/introduction)
 - Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
 - Join the [chat](http://slack.getdbt.com/) on Slack for live discussions and support
 - Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+- Check out [the dbt blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
