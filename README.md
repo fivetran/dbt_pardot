@@ -24,7 +24,7 @@ Include in your `packages.yml`
 
 ```yaml
 packages:
-  - package: fivetran/pardot_source
+  - package: fivetran/pardot
     version: [">=0.3.0", "<0.4.0"]
 ```
 
