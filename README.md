@@ -11,10 +11,10 @@ This package contains transformation models, designed to work simultaneously wit
 
 | **model**                | **description**                                                                                                     |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------- |
-| [pardot__campaigns](models/pardot__campaigns.sql)         | Each record represents a campaign in Pardot, enriched with metrics about associated prospects.                      |
-| [pardot__lists](models/pardot__lists.sql)            | Each record represents a list in Pardot, enriched with metrics about associated prospect activity.                  |
-| [pardot__opportunities](models/pardot__opportunities.sql)    | Each record represents an opportunity in Pardot, enriched with metrics about associated prospects.                   |
-| [pardot__prospects](models/pardot__prospects.sql)        | Each record represents a prospect in Pardot, enriched with metrics about associated prospect activity.             |
+| [pardot__campaigns](https://github.com/fivetran/dbt_pardot/blob/main/models/pardot__campaigns.sql)         | Each record represents a campaign in Pardot, enriched with metrics about associated prospects.                      |
+| [pardot__lists](https://github.com/fivetran/dbt_pardot/blob/main/models/pardot__lists.sql)            | Each record represents a list in Pardot, enriched with metrics about associated prospect activity.                  |
+| [pardot__opportunities](https://github.com/fivetran/dbt_pardot/blob/main/models/pardot__opportunities.sql)    | Each record represents an opportunity in Pardot, enriched with metrics about associated prospects.                   |
+| [pardot__prospects](https://github.com/fivetran/dbt_pardot/blob/main/models/pardot__prospects.sql)        | Each record represents a prospect in Pardot, enriched with metrics about associated prospect activity.             |
 
 
 ## Installation Instructions
