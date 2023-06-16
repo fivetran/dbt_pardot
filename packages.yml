@@ -1,3 +1,7 @@
 packages:
-- package: fivetran/pardot_source
-  version: [">=0.5.0", "<0.6.0"]
+# - package: fivetran/pardot_source
+#   version: [">=0.5.0", "<0.6.0"]
+
+- git: https://github.com/fivetran/dbt_pardot_source.git
+  revision: MagicBot/databricks-compatibility
+  warn-unpinned: false

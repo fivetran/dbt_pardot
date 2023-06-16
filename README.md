@@ -36,7 +36,7 @@ This package contains transformation models, designed to work simultaneously wit
 To use this dbt package, you must have the following:
 
 - At least one Fivetran Pardot connector syncing data into your destination.
-- A **BigQuery**, **Snowflake**, **Redshift**, or **PostgreSQL** destination.
+- A **BigQuery**, **Snowflake**, **Redshift**, **PostgreSQL**, or **Databricks** destination.
 
 ## Step 2: Install the package
 Include the following pardot package version in your `packages.yml` file:
@@ -45,7 +45,7 @@ Include the following pardot package version in your `packages.yml` file:
 ```yaml
 packages:
   - package: fivetran/pardot
-    version: [">=0.5.0", "<0.6.0"]
+    version: [">=0.6.0", "<0.7.0"]
 ```
 Do **NOT** include the `pardot_source` package in this file. The transformation package itself has a dependency on it and will install the source package as well. 
 
@@ -126,7 +126,7 @@ packages:
       version: [">=1.0.0", "<2.0.0"]
 
     - package: fivetran/pardot_source
-      version: [">=0.5.0", "<0.6.0"]
+      version: [">=0.6.0", "<0.7.0"]
 ```
 
 # 🙌 How is this package maintained and can I contribute?
