@@ -1,8 +1,6 @@
 with activities as (
-    select 
-    * 
-
-from {{ ref('int_pardot__activities_join_enriched') }}
+    select * 
+    from {{ ref('int_pardot__activities_join_enriched') }}
 ),
 
 prospects as (
