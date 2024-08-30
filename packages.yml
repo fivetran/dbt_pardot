@@ -1,2 +1,3 @@
 packages:
-  - local: /usr/app/dbt/temp/dbt_pardot_source
+  - git: "https://github.com/theirc/er-analytics-dbt_pardot_source"
+    revision: "main"
