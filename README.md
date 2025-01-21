@@ -1,4 +1,6 @@
-<p align="center">
+# Pardot Transformation dbt Package ([Docs](https://fivetran.github.io/dbt_pardot/))
+
+<p align="left">
     <a alt="License"
         href="https://github.com/fivetran/dbt_pardot/blob/main/LICENSE">
         <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" /></a>
@@ -10,7 +12,6 @@
         <img src="https://img.shields.io/badge/Contributions-welcome-blueviolet" /></a>
 </p>
 
-# Pardot Transformation dbt Package ([Docs](https://fivetran.github.io/dbt_pardot/))
 ## What does this dbt package do?
 - Produces modeled tables that beverage Pardot data from [Fivetran's connector](https://fivetran.com/docs/applications/pardot) in the format described by [this ERD](https://fivetran.com/docs/applications/pardot#schemainformation) and builds off the output of our [Pardot source package](https://github.com/fivetran/dbt_pardot_source).
 - Enables you to better understand your Pardot prospects, opportunities, lists, and campaign performance.
