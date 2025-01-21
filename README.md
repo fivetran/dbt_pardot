@@ -1,4 +1,6 @@
-<p align="center">
+# Pardot Transformation dbt Package ([Docs](https://fivetran.github.io/dbt_pardot/))
+
+<p align="left">
     <a alt="License"
         href="https://github.com/fivetran/dbt_pardot/blob/main/LICENSE">
         <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" /></a>
@@ -10,7 +12,6 @@
         <img src="https://img.shields.io/badge/Contributions-welcome-blueviolet" /></a>
 </p>
 
-# Pardot Transformation dbt Package ([Docs](https://fivetran.github.io/dbt_pardot/))
 ## What does this dbt package do?
 - Produces modeled tables that beverage Pardot data from [Fivetran's connector](https://fivetran.com/docs/applications/pardot) in the format described by [this ERD](https://fivetran.com/docs/applications/pardot#schemainformation) and builds off the output of our [Pardot source package](https://github.com/fivetran/dbt_pardot_source).
 - Enables you to better understand your Pardot prospects, opportunities, lists, and campaign performance.
@@ -27,6 +28,8 @@ The following table provides a detailed list of all tables materialized within t
 | [pardot__opportunities](https://fivetran.github.io/dbt_pardot/#!/model/model.pardot.pardot__opportunities)    | Each record represents an opportunity in Pardot, enriched with metrics about associated prospects.                   |
 | [pardot__prospects](https://fivetran.github.io/dbt_pardot/#!/model/model.pardot.pardot__prospects)        | Each record represents a prospect in Pardot, enriched with metrics about associated prospect activity.             |
 
+### Materialized Models
+Each Quickstart transformation job run materializes 21 models if all components of this data model are enabled. This count includes all staging, intermediate, and final models materialized as `view`, `table`, or `incremental`.
 <!--section-end-->
 
 ## How do I use the dbt package?
@@ -34,7 +37,7 @@ The following table provides a detailed list of all tables materialized within t
 ### Step 1: Prerequisites
 To use this dbt package, you must have the following:
 
-- At least one Fivetran Pardot connector syncing data into your destination.
+- At least one Fivetran Pardot connection syncing data into your destination.
 - A **BigQuery**, **Snowflake**, **Redshift**, **PostgreSQL**, or **Databricks** destination.
 
 ### Step 2: Install the package
