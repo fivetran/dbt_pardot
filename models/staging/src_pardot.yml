@@ -6,6 +6,9 @@ sources:
     database: "{% if target.type != 'spark' %}{{ var('pardot_database', target.database)}}{% endif %}"
     loader: Fivetran
 
+    config:
+      loaded_at_field: _fivetran_synced
+
     tables:
       - name: list
         identifier: "{{ var('pardot_list_identifier', 'list')}}"
