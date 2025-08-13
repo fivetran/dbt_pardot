@@ -22,3 +22,4 @@ vars:
     visitor_activity: "{{ source('pardot', 'visitor_activity') }}"
     visitor: "{{ source('pardot', 'visitor') }}"
     prospect_metrics_activity_types: []
+    prospect_passthrough_columns: []
