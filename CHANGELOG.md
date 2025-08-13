@@ -19,7 +19,9 @@
   - Removed all `accepted_values` tests.
   - Moved `loaded_at_field: _fivetran_synced` under the `config:` block in `src_pardot.yml`.
 
-# dbt_pardot version.version
+### Under the Hood
+- Updated conditions in `.github/workflows/auto-release.yml`.
+- Added `.github/workflows/generate-docs.yml`.
 
 ## Documentation
 - Added Quickstart model counts to README. ([#18](https://github.com/fivetran/dbt_pardot/pull/18))
