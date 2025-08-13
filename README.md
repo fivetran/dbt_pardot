@@ -1,4 +1,4 @@
-# Pardot Transformation dbt Package ([Docs](https://fivetran.github.io/dbt_pardot/))
+# Pardot dbt Package ([Docs](https://fivetran.github.io/dbt_pardot/))
 
 <p align="left">
     <a alt="License"
