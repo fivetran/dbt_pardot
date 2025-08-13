@@ -1,12 +1,12 @@
 with activities as (
 
     select *
-    from {{ var('visitor_activity') }}
+    from {{ ref('stg_pardot__visitor_activity') }}
 
 ), visitors as (
 
     select *
-    from {{ var('visitor') }}
+    from {{ ref('stg_pardot__visitor') }}
 
 ), joined as (
 

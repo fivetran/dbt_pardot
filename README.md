@@ -16,7 +16,7 @@
 </p>
 
 ## What does this dbt package do?
-- Produces modeled tables that beverage Pardot data from [Fivetran's connector](https://fivetran.com/docs/applications/pardot) in the format described by [this ERD](https://fivetran.com/docs/applications/pardot#schemainformation) and builds off the output of our [Pardot source package](https://github.com/fivetran/dbt_pardot_source).
+- Produces modeled tables that beverage Pardot data from [Fivetran's connector](https://fivetran.com/docs/applications/pardot) in the format described by [this ERD](https://fivetran.com/docs/applications/pardot#schemainformation).
 - Enables you to better understand your Pardot prospects, opportunities, lists, and campaign performance.
 - Generates a comprehensive data dictionary of your source and modeled Pardot data through the [dbt docs site](https://fivetran.github.io/dbt_pardot/#!/overview).
 
@@ -50,23 +50,22 @@ Include the following pardot package version in your `packages.yml` file:
 ```yaml
 packages:
   - package: fivetran/pardot
-    version: [">=0.6.0", "<0.7.0"]
+    version: [">=1.0.0", "<1.1.0"]
 ```
-Do **NOT** include the `pardot_source` package in this file. The transformation package itself has a dependency on it and will install the source package as well.
+> All required sources and staging models are now bundled into this transformation package. Do not include `fivetran/pardot_source` in your `packages.yml` since this package has been deprecated.
 
 ### Step 3: Define database and schema variables
 By default, this package runs using your destination and the `pardot` schema. If this is not where your Pardot data is (for example, if your Pardot schema is named `pardot_fivetran`), add the following configuration to your root `dbt_project.yml` file:
 
 ```yml
 vars:
-  pardot_source:
+  pardot:
     pardot_database: your_database_name
     pardot_schema: your_schema_name 
 ```
 
 ### (Optional) Step 4: Additional configurations
-
-<details><summary>Expand for configurations</summary>
+<details open><summary>Expand/Collapse details</summary>
 
 #### Passthrough Columns
 
@@ -74,7 +73,7 @@ By default, the package includes all of the standard columns in the `stg_pardot_
 
 ```yml
 vars:
-  pardot_source:
+  pardot:
     prospect_passthrough_columns: ["custom_creative","custom_contact_state"]
 ```
 
@@ -94,9 +93,9 @@ By default this package will build the Pardot staging models within a schema tit
 ```yml
 models:
     pardot:
-      +schema: my_new_schema_name # leave blank for just the target_schema
-    pardot_source:
-      +schema: my_new_schema_name # leave blank for just the target_schema
+      +schema: my_new_schema_name # Leave +schema: blank to use the default target_schema.
+      staging:
+        +schema: my_new_schema_name # Leave +schema: blank to use the default target_schema.
 ```
 
 #### Change the source table references
@@ -128,8 +127,6 @@ packages:
     - package: dbt-labs/dbt_utils
       version: [">=1.0.0", "<2.0.0"]
 
-    - package: fivetran/pardot_source
-      version: [">=0.6.0", "<0.7.0"]
 ```
 
 ## How is this package maintained and can I contribute?
