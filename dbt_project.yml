@@ -9,8 +9,7 @@ models:
     intermediate:
       +materialized: ephemeral
     staging:
-      +schema: pardot_source
-      +materialized: view
+      +schema: stg_pardot
 vars:
   pardot:
     campaign: "{{ source('pardot', 'campaign') }}"
