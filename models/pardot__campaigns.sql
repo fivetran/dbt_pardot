@@ -1,12 +1,12 @@
 with campaigns as (
 
     select *
-    from {{ var('campaign') }}
+    from {{ ref('stg_pardot__campaign') }}
 
 ), prospects as (
 
     select *
-    from {{ var('prospect') }}
+    from {{ ref('stg_pardot__prospect') }}
 
 ), opportunities as (
 

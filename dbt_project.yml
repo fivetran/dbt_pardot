@@ -1,5 +1,5 @@
 name: 'pardot'
-version: '0.6.0'
+version: '1.0.0'
 config-version: 2
 require-dbt-version: [">=1.3.0", "<2.0.0"]
 models:
@@ -8,14 +8,17 @@ models:
     +schema: pardot
     intermediate:
       +materialized: ephemeral
+    staging:
+      +schema: pardot_source
+      +materialized: view
 vars:
   pardot:
-    campaign: "{{ ref('stg_pardot__campaign') }}"
-    list_membership: "{{ ref('stg_pardot__list_membership') }}"
-    list: "{{ ref('stg_pardot__list') }}"
-    opportunity_prospect: "{{ ref('stg_pardot__opportunity_prospect') }}"
-    opportunity: "{{ ref('stg_pardot__opportunity') }}"
-    prospect: "{{ ref('stg_pardot__prospect') }}"
-    visitor_activity: "{{ ref('stg_pardot__visitor_activity') }}"
-    visitor: "{{ ref('stg_pardot__visitor') }}"
+    campaign: "{{ source('pardot', 'campaign') }}"
+    list_membership: "{{ source('pardot', 'list_membership') }}"
+    list: "{{ source('pardot', 'list') }}"
+    opportunity_prospect: "{{ source('pardot', 'opportunity_prospect') }}"
+    opportunity: "{{ source('pardot', 'opportunity') }}"
+    prospect: "{{ source('pardot', 'prospect') }}"
+    visitor_activity: "{{ source('pardot', 'visitor_activity') }}"
+    visitor: "{{ source('pardot', 'visitor') }}"
     prospect_metrics_activity_types: []

@@ -1,4 +1,4 @@
 {{ config(materialized='view') }}
 
 select *
-from {{ var('opportunity') }}
+from {{ ref('stg_pardot__opportunity') }}

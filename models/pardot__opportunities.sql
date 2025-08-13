@@ -1,12 +1,12 @@
 with opportunities as (
 
     select *
-    from {{ var('opportunity') }}
+    from {{ ref('stg_pardot__opportunity') }}
 
 ), prospects as (
 
     select *
-    from {{ var('opportunity_prospect') }}
+    from {{ ref('stg_pardot__opportunity_prospect') }}
 
 ), prospects_xf as (
 

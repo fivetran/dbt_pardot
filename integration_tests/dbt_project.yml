@@ -1,9 +1,9 @@
 name: 'pardot_integration_tests'
-version: '0.6.0'
+version: '1.0.0'
 profile: 'integration_tests'
 config-version: 2
 vars:
-  pardot_source:
+  pardot:
     pardot_schema: pardot_integration_tests
     pardot_list_identifier: "pardot_list_data"
     pardot_list_membership_identifier: "pardot_list_membership_data"
