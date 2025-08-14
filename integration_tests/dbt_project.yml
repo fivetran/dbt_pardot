@@ -1,9 +1,9 @@
 name: 'pardot_integration_tests'
-version: '0.6.0'
+version: '1.0.0'
 profile: 'integration_tests'
 config-version: 2
 vars:
-  pardot_source:
+  pardot:
     pardot_schema: pardot_integration_tests
     pardot_list_identifier: "pardot_list_data"
     pardot_list_membership_identifier: "pardot_list_membership_data"
@@ -14,8 +14,13 @@ vars:
     pardot_opportunity_identifier: "pardot_opportunity_data"
     pardot_opportunity_prospect_identifier: "pardot_opportunity_prospect_data"
 seeds:
+  +docs:
+    show: False
   +quote_columns: "{{ true if target.type == 'redshift' else false }}"
 
 dispatch:
   - macro_namespace: dbt_utils
     search_order: ['spark_utils', 'dbt_utils']
+flags:
+  send_anonymous_usage_stats: False
+  use_colors: True

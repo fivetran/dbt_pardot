@@ -1,7 +1,7 @@
 with prospects as (
 
     select *
-    from {{ var('prospect') }}
+    from {{ ref('stg_pardot__prospect') }}
 
 ), activities as (
 

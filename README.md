@@ -1,19 +1,22 @@
-# Pardot Transformation dbt Package ([Docs](https://fivetran.github.io/dbt_pardot/))
+# Pardot dbt Package ([Docs](https://fivetran.github.io/dbt_pardot/))
 
 <p align="left">
     <a alt="License"
         href="https://github.com/fivetran/dbt_pardot/blob/main/LICENSE">
         <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" /></a>
     <a alt="dbt-core">
-        <img src="https://img.shields.io/badge/dbt_Core™_version->=1.3.0_<2.0.0-orange.svg" /></a>
+        <img src="https://img.shields.io/badge/dbt_Core™_version->=1.3.0_,<2.0.0-orange.svg" /></a>
     <a alt="Maintained?">
         <img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" /></a>
     <a alt="PRs">
         <img src="https://img.shields.io/badge/Contributions-welcome-blueviolet" /></a>
+    <a alt="Fivetran Quickstart Compatible"
+        href="https://fivetran.com/docs/transformations/dbt/quickstart">
+        <img src="https://img.shields.io/badge/Fivetran_Quickstart_Compatible%3F-yes-green.svg" /></a>
 </p>
 
 ## What does this dbt package do?
-- Produces modeled tables that beverage Pardot data from [Fivetran's connector](https://fivetran.com/docs/applications/pardot) in the format described by [this ERD](https://fivetran.com/docs/applications/pardot#schemainformation) and builds off the output of our [Pardot source package](https://github.com/fivetran/dbt_pardot_source).
+- Produces modeled tables that beverage Pardot data from [Fivetran's connector](https://fivetran.com/docs/applications/pardot) in the format described by [this ERD](https://fivetran.com/docs/applications/pardot#schemainformation).
 - Enables you to better understand your Pardot prospects, opportunities, lists, and campaign performance.
 - Generates a comprehensive data dictionary of your source and modeled Pardot data through the [dbt docs site](https://fivetran.github.io/dbt_pardot/#!/overview).
 
@@ -47,23 +50,22 @@ Include the following pardot package version in your `packages.yml` file:
 ```yaml
 packages:
   - package: fivetran/pardot
-    version: [">=0.6.0", "<0.7.0"]
+    version: [">=1.0.0", "<1.1.0"]
 ```
-Do **NOT** include the `pardot_source` package in this file. The transformation package itself has a dependency on it and will install the source package as well.
+> All required sources and staging models are now bundled into this transformation package. Do not include `fivetran/pardot_source` in your `packages.yml` since this package has been deprecated.
 
 ### Step 3: Define database and schema variables
 By default, this package runs using your destination and the `pardot` schema. If this is not where your Pardot data is (for example, if your Pardot schema is named `pardot_fivetran`), add the following configuration to your root `dbt_project.yml` file:
 
 ```yml
 vars:
-  pardot_source:
+  pardot:
     pardot_database: your_database_name
     pardot_schema: your_schema_name 
 ```
 
 ### (Optional) Step 4: Additional configurations
-
-<details><summary>Expand for configurations</summary>
+<details open><summary>Expand/Collapse details</summary>
 
 #### Passthrough Columns
 
@@ -71,7 +73,7 @@ By default, the package includes all of the standard columns in the `stg_pardot_
 
 ```yml
 vars:
-  pardot_source:
+  pardot:
     prospect_passthrough_columns: ["custom_creative","custom_contact_state"]
 ```
 
@@ -91,15 +93,15 @@ By default this package will build the Pardot staging models within a schema tit
 ```yml
 models:
     pardot:
-      +schema: my_new_schema_name # leave blank for just the target_schema
-    pardot_source:
-      +schema: my_new_schema_name # leave blank for just the target_schema
+      +schema: my_new_schema_name # Leave +schema: blank to use the default target_schema.
+      staging:
+        +schema: my_new_schema_name # Leave +schema: blank to use the default target_schema.
 ```
 
 #### Change the source table references
 If an individual source table has a different name than the package expects, add the table name as it appears in your destination to the respective variable:
-> IMPORTANT: See this project's [`dbt_project.yml`](https://github.com/fivetran/dbt_pardot_source/blob/main/dbt_project.yml) variable declarations to see the expected names.
-    
+> IMPORTANT: See this project's [`dbt_project.yml`](https://github.com/fivetran/dbt_pardot/blob/main/dbt_project.yml) variable declarations to see the expected names.
+
 ```yml
 vars:
     pardot_<default_source_table_name>_identifier: your_table_name 
@@ -109,14 +111,14 @@ vars:
 ### (Optional) Step 6: Orchestrate your models with Fivetran Transformations for dbt Core™
 <details><summary>Expand to view details</summary>
 <br>
-    
+
 Fivetran offers the ability for you to orchestrate your dbt project through [Fivetran Transformations for dbt Core™](https://fivetran.com/docs/transformations/dbt). Learn how to set up your project for orchestration through Fivetran in our [Transformations for dbt Core™ setup guides](https://fivetran.com/docs/transformations/dbt#setupguide).
 </details>
 
 ## Does this package have dependencies?
 This dbt package is dependent on the following dbt packages. These dependencies are installed by default within this package. For more information on the following packages, refer to the [dbt hub](https://hub.getdbt.com/) site.
 > IMPORTANT: If you have any of these dependent packages in your own `packages.yml` file, we highly recommend that you remove them from your root `packages.yml` to avoid package version conflicts.
-    
+
 ```yml
 packages:
     - package: fivetran/fivetran_utils
@@ -125,8 +127,6 @@ packages:
     - package: dbt-labs/dbt_utils
       version: [">=1.0.0", "<2.0.0"]
 
-    - package: fivetran/pardot_source
-      version: [">=0.6.0", "<0.7.0"]
 ```
 
 ## How is this package maintained and can I contribute?

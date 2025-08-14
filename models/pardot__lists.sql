@@ -1,7 +1,7 @@
 with lists as (
 
     select *
-    from {{ var('list') }}
+    from {{ ref('stg_pardot__list') }}
 
 ), activities as (
 

@@ -6,12 +6,12 @@ with prospects as (
 ), lists as (
 
     select *
-    from {{ var('list') }}
+    from {{ ref('stg_pardot__list') }}
 
 ), list_membership as (
 
     select *
-    from {{ var('list_membership') }}
+    from {{ ref('stg_pardot__list_membership') }}
 
 ), joined as (
 
