@@ -12,7 +12,7 @@ with prospects as (
 
     select 
         prospect_id,
-        account_id,
+        account_id
     from {{ ref('int_pardot__prospects_join_enriched') }}
 
 ), joined as (
