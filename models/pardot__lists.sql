@@ -18,7 +18,8 @@ with lists as (
         activities.most_recent_visit_activity_timestamp
     from lists
     left join activities
-        using (list_id)
+        on lists.list_id = activities.list_id
+        and lists.source_relation = activities.source_relation
 
 )
 

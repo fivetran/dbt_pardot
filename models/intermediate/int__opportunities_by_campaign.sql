@@ -7,7 +7,8 @@ with opportunities as (
 
 ), aggregated as (
 
-    select 
+    select
+        source_relation,
         campaign_id,
         count(*) as count_opportunities,
 
@@ -16,9 +17,9 @@ with opportunities as (
         sum(case when opportunity_status = '{{ status }}' then amount end) as sum_opportunity_amount_{{ status|lower|replace(' ','_') }}
         {% if not loop.last %} , {% endif %}
         {% endfor %}
-    
+
     from opportunities
-    group by 1
+    group by 1, 2
 
 )
 

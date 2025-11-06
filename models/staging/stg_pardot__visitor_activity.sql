@@ -15,13 +15,15 @@ fields as (
                 staging_columns=get_visitor_activity_columns()
             )
         }}
-        
+        {{ pardot.apply_source_relation() }}
+
     from base
 ),
 
 final as (
-    
-    select 
+
+    select
+        source_relation,
         id as visitor_activity_id,
         type_name as event_type_name,
         prospect_id,

@@ -9,6 +9,9 @@ profiles.yml
 target/
 *.log
 
+# Claude instructions
+union_data_agents.md
+
 # IDE files
 .idea/
 .vscode/

@@ -1,8 +1,9 @@
 name: 'pardot_integration_tests'
-version: '1.0.0'
+version: '1.1.0'
 profile: 'integration_tests'
 config-version: 2
 vars:
+  has_defined_sources: true
   pardot:
     pardot_schema: pardot_integration_tests
     pardot_list_identifier: "pardot_list_data"
