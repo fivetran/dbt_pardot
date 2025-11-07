@@ -272,7 +272,7 @@ models:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
       - name: opportunity_prospect_id
-        description: Primary key for the table
+        description: Primary key for the table hashed on `source_relation`, `opportunity_id`, and prospect_id`
         tests:
           - not_null
       - name: _fivetran_synced
