@@ -1,7 +1,7 @@
 # dbt_pardot v1.1.0
 
 ## Schema/Data Change
-**2 total changes • 0 possible breaking changes**
+**2 total changes • 1 possible breaking changes**
 
 | Data Model(s) | Change type | Old | New | Notes |
 | ------------- | ----------- | ----| --- | ----- |
@@ -13,6 +13,7 @@
 
 ## Tests Update
 - Removes uniqueness tests. The new unioning feature requires combination-of-column tests to consider the new `source_relation` column in addition to the existing primary key, but this is not supported across dbt versions.
+  - Note that surrogate keys are unaffected and retain their uniqueness tests
 - These tests will be reintroduced once a version-agnostic solution is available.
 
 ## Under the Hood
