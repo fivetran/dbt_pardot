@@ -16,14 +16,15 @@ with prospects as (
         coalesce(activities.count_activity_{{ event_type|lower|replace(' ','_') }},0) as count_activity_{{ event_type|lower|replace(' ','_') }},
         activities.most_recent_{{ event_type|lower|replace(' ','_') }}_activity_timestamp,
         {% endfor %}
-        
+
         coalesce(activities.count_activity_visits,0) as count_activity_visits,
         coalesce(activities.count_activity_emails,0) as count_activity_emails,
         activities.most_recent_visit_activity_timestamp,
         activities.most_recent_email_activity_timestamp
     from prospects
     left join activities
-        using (prospect_id)
+        on prospects.prospect_id = activities.prospect_id
+        and prospects.source_relation = activities.source_relation
 
 )
 

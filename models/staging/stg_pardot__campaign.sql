@@ -15,14 +15,16 @@ fields as (
                 staging_columns=get_campaign_columns()
             )
         }}
-        
+        {{ pardot.apply_source_relation() }}
+
     from base
     where not coalesce(_fivetran_deleted, false)
 ),
 
 final as (
-    
-    select 
+
+    select
+        source_relation,
         id as campaign_id,
         name as campaign_name,
         cost,

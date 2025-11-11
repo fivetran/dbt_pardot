@@ -15,13 +15,15 @@ fields as (
                 staging_columns=get_opportunity_columns()
             )
         }}
-        
+        {{ pardot.apply_source_relation() }}
+
     from base
 ),
 
 final as (
-    
-    select 
+
+    select
+        source_relation,
         id as opportunity_id,
         campaign_id,
         created_at as created_timestamp,

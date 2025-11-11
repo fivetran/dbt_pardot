@@ -1,7 +1,10 @@
 name: 'pardot_integration_tests'
-version: '1.0.0'
+version: '1.1.0'
 profile: 'integration_tests'
 config-version: 2
+
+models:
+  +schema: "pardot_{{ var('directed_schema','dev') }}"
 vars:
   pardot:
     pardot_schema: pardot_integration_tests

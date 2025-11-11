@@ -5,6 +5,8 @@ models:
   - name: stg_pardot__list
     description: Each record represents a list in Pardot.
     columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
       - name: _fivetran_synced
         description:  "{{ doc('_fivetran_synced') }}"
       - name: created_timestamp
@@ -14,7 +16,6 @@ models:
       - name: list_id
         description: Pardot ID of this list
         tests:
-          - unique
           - not_null
       - name: is_crm_visible
         description: If true, list is visible in CRM to add or remove from
@@ -32,6 +33,8 @@ models:
   - name: stg_pardot__list_membership
     description: Every record represents membership of a prospect in a list.
     columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
       - name: _fivetran_synced
         description: "{{ doc('_fivetran_synced') }}"
       - name: created_timestamp
@@ -39,10 +42,9 @@ models:
       - name: list_membership_id
         description: Pardot ID for this list membership
         tests:
-          - unique
           - not_null
       - name: list_id
-        description: Pardot ID of the list for this membershipBD
+        description: Pardot ID of the list for this membership
       - name: has_opted_out
         description: If value is 1, the prospect is unsubscribed from receiving emails from this list
       - name: prospect_id
@@ -53,12 +55,13 @@ models:
   - name: stg_pardot__visitor
     description: Each record represents a website visitor.
     columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
       - name: _fivetran_synced
         description: "{{ doc('_fivetran_synced') }}"
       - name: visitor_id
         description: Pardot ID for this visitor
         tests:
-          - unique
           - not_null
       - name: prospect_id
         description: Pardot ID for the associated prospect
@@ -86,12 +89,13 @@ models:
   - name: stg_pardot__visitor_activity
     description: Each record represents a visitors session on a website.
     columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
       - name: _fivetran_synced
         description: "{{ doc('_fivetran_synced') }}"
       - name: visitor_activity_id
         description: Pardot ID for this visitor activity
         tests:
-          - unique
           - not_null
       - name: prospect_id
         description: Pardot ID for the associated prospect
@@ -111,6 +115,8 @@ models:
   - name: stg_pardot__prospect
     description: Each record in the table represents a prospect in Pardot.
     columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
       - name: _fivetran_deleted
         description: "{{ doc('_fivetran_deleted') }}"
       - name: _fivetran_synced
@@ -118,7 +124,6 @@ models:
       - name: prospect_id
         description: Pardot ID for this prospect
         tests:
-          - unique
           - not_null
       - name: campaign_id
         description: Pardot ID of the campaign associated with this prospect
@@ -214,6 +219,8 @@ models:
   - name: stg_pardot__campaign
     description: Each record represents a campaign in Pardot
     columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
       - name: _fivetran_deleted
         description: "{{ doc('_fivetran_deleted') }}"
       - name: _fivetran_synced
@@ -221,7 +228,6 @@ models:
       - name: campaign_id
         description: Pardot ID for this campaign
         tests:
-          - unique
           - not_null
       - name: campaign_name
         description: Campaign's name
@@ -231,12 +237,13 @@ models:
   - name: stg_pardot__opportunity
     description: Each record represents an opportunity in Pardot.
     columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
       - name: _fivetran_synced
         description: "{{ doc('_fivetran_synced') }}"
       - name: opportunity_id
         description: Pardot ID for this opportunity
         tests:
-          - unique
           - not_null
       - name: campaign_id
         description: Pardot ID of the campaign associated with this opportunity
@@ -262,8 +269,10 @@ models:
   - name: stg_pardot__opportunity_prospect
     description: Each record represents a prospect's involvement in an opportunity in Pardot.
     columns:
+      - name: source_relation
+        description: "{{ doc('source_relation') }}"
       - name: opportunity_prospect_id
-        description: Primary key for the table
+        description: Primary key for the table hashed on `source_relation`, `opportunity_id`, and prospect_id`
         tests:
           - unique
           - not_null

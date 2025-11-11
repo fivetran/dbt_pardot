@@ -15,18 +15,20 @@ fields as (
                 staging_columns=get_prospect_columns()
             )
         }}
+        {{ pardot.apply_source_relation() }}
 
         {% if var('prospect_passthrough_columns') %}
         , {{ var('prospect_passthrough_columns')|join(',') }}
         {% endif %}
-        
+
     from base
     where not coalesce(_fivetran_deleted, false)
 ),
 
 final as (
-    
-    select 
+
+    select
+        source_relation,
         id as prospect_id,
         _fivetran_deleted,
         _fivetran_synced,

@@ -11,10 +11,11 @@ with opportunities as (
 ), prospects_xf as (
 
     select
+        source_relation,
         opportunity_id,
         count(*) as count_prospects
     from prospects
-    group by 1
+    group by 1, 2
 
 ), joined as (
 
@@ -23,7 +24,8 @@ with opportunities as (
         prospects_xf.count_prospects
     from opportunities
     left join prospects_xf
-        using (opportunity_id)
+        on opportunities.opportunity_id = prospects_xf.opportunity_id
+        and opportunities.source_relation = prospects_xf.source_relation
 
 )
 

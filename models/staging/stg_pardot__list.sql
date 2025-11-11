@@ -15,13 +15,15 @@ fields as (
                 staging_columns=get_list_columns()
             )
         }}
-        
+        {{ pardot.apply_source_relation() }}
+
     from base
 ),
 
 final as (
-    
-    select 
+
+    select
+        source_relation,
         id as list_id,
         name,
         description,
