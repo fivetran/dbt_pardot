@@ -1,7 +1,8 @@
 # dbt_pardot v1.1.0
+[PR #24](https://github.com/fivetran/dbt_pardot/pull/24) includes the following updates:
 
 ## Schema/Data Change
-**2 total changes • 1 possible breaking changes**
+**2 total changes • 1 possible breaking change**
 
 | Data Model(s) | Change type | Old | New | Notes |
 | ------------- | ----------- | ----| --- | ----- |
@@ -13,7 +14,7 @@
 
 ## Tests Update
 - Removes uniqueness tests. The new unioning feature requires combination-of-column tests to consider the new `source_relation` column in addition to the existing primary key, but this is not supported across dbt versions.
-  - Note that surrogate keys are unaffected and retain their uniqueness tests
+  - Note that surrogate keys are unaffected and retain their uniqueness tests.
 - These tests will be reintroduced once a version-agnostic solution is available.
 
 ## Under the Hood
