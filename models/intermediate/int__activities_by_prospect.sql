@@ -11,7 +11,7 @@ with activities as (
 ), joined as (
 
     select
-        coalesce(visitors.source_relation, activities.source_relation) as source_relation,
+        activities.source_relation,
         activities.event_type_name,
         activities.created_timestamp,
         coalesce(visitors.prospect_id, activities.prospect_id) as prospect_id

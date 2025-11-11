@@ -15,6 +15,9 @@
 - Removes uniqueness tests. The new unioning feature requires combination-of-column tests to consider the new `source_relation` column in addition to the existing primary key, but this is not supported across dbt versions.
 - These tests will be reintroduced once a version-agnostic solution is available.
 
+## Under the Hood
+- Deprecated `int__opportunities_by_campaign` intermediate model. The logic has been consolidated directly into the `pardot__campaigns` end model as a CTE for improved performance and maintainability. The deprecated model is disabled by default and will be removed in a future major version.
+
 # dbt_pardot v1.0.0
 
 [PR #20](https://github.com/fivetran/dbt_pardot/pull/20) includes the following updates:

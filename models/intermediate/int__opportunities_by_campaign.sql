@@ -1,3 +1,19 @@
+{{
+    config(
+        enabled=false
+    )
+}}
+
+/*
+    DEPRECATED: This model has been deprecated as of v1.1.0.
+
+    The logic from this model has been moved directly into the pardot__campaigns
+    end model as a CTE for improved performance and maintainability.
+
+    This file is retained for backwards compatibility but is disabled by default.
+    It will be removed in a future major version.
+*/
+
 {% set statuses = dbt_utils.get_column_values(table=ref('int__opportunity_tmp'), column='opportunity_status') %}
 
 with opportunities as (

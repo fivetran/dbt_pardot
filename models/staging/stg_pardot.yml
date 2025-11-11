@@ -44,7 +44,7 @@ models:
         tests:
           - not_null
       - name: list_id
-        description: Pardot ID of the list for this membershipBD
+        description: Pardot ID of the list for this membership
       - name: has_opted_out
         description: If value is 1, the prospect is unsubscribed from receiving emails from this list
       - name: prospect_id
@@ -274,6 +274,7 @@ models:
       - name: opportunity_prospect_id
         description: Primary key for the table hashed on `source_relation`, `opportunity_id`, and prospect_id`
         tests:
+          - unique
           - not_null
       - name: _fivetran_synced
         description: "{{ doc('_fivetran_synced') }}"
