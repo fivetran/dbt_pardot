@@ -17,7 +17,7 @@
 - These tests will be reintroduced once a version-agnostic solution is available.
 
 ## Under the Hood
-- Deprecated `int__opportunities_by_campaign` intermediate model. The logic has been consolidated directly into the `pardot__campaigns` end model as a CTE for improved performance and maintainability. The deprecated model is disabled by default and will be removed in a future major version.
+- Deprecated `int__opportunities_by_campaign` intermediate model. The logic has been consolidated directly into the `pardot__campaigns` end model as a CTE for improved performance and maintainability.
 
 # dbt_pardot v1.0.0
 
