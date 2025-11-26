@@ -10,9 +10,9 @@ with opportunities_tmp as (
     
 ), opportunities as ( 
     select 
-        source_relation, campaign_id
+        source_relation, campaign_id,
         count(*) as count_opportunities
-        {% if statuses == [] %} , {% endif %} 
+        {% if statuses != [] %} , {% endif %} 
     
         {% for status in statuses %} 
         count(case when opportunity_status = '{{ status }}' then 1 end) as count_opportunities_{{ status|lower|replace(' ','_') }}, 
