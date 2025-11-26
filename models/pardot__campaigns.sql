@@ -1,4 +1,8 @@
-{% set statuses = dbt_utils.get_column_values(table=ref('int__opportunity_tmp'), column='opportunity_status') %} 
+{% if execute and flags.WHICH in ('run', 'build') %}
+    {% set statuses = dbt_utils.get_column_values(table=ref('int__opportunity_tmp'), column='opportunity_status') %} 
+{% else %}
+    {% set statuses = [] %}
+{% endif %}
 
 with opportunities_tmp as (
     select * 
@@ -6,8 +10,9 @@ with opportunities_tmp as (
     
 ), opportunities as ( 
     select 
-        source_relation, campaign_id, 
-        count(*) as count_opportunities, 
+        source_relation, campaign_id
+        count(*) as count_opportunities
+        {% if statuses == [] %} , {% endif %} 
     
         {% for status in statuses %} 
         count(case when opportunity_status = '{{ status }}' then 1 end) as count_opportunities_{{ status|lower|replace(' ','_') }}, 
