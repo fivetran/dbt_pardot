@@ -1,8 +1,9 @@
-#dbt_pardot v1.1.1
-[PR #25] (link anticipated, to be changed on PR submission) includes the following updates:
+# dbt_pardot v1.1.1
 
-## Bugfix
-- Column introspection in the `pardot__campaigns` model (on the `int__opportunity_tmp` model) has been limited to the `run` and `build` contexts to prevent projects from compiling in certain cases.
+[PR #25](link to be added upon submission) introduces the following update:
+
+## Bug Fix
+- Limits column introspection in `pardot__campaigns` (via the `int__opportunity_tmp` model) to execution time (i.e. during the `dbt run` and `dbt build`) to avoid errors during `dbt compile`.
 
 # dbt_pardot v1.1.0
 [PR #24](https://github.com/fivetran/dbt_pardot/pull/24) includes the following updates:
