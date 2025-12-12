@@ -1,8 +1,4 @@
-{% if execute and flags.WHICH in ('run', 'build') %}
-    {% set statuses = dbt_utils.get_column_values(table=ref('int__opportunity_tmp'), column='opportunity_status') %} 
-{% else %}
-    {% set statuses = [] %}
-{% endif %}
+ {% set statuses = dbt_utils.get_column_values(table=ref('int__opportunity_tmp'), column='opportunity_status') if execute and flags.WHICH in ('run', 'build') else [] %} 
 
 with opportunities_tmp as (
     select * 

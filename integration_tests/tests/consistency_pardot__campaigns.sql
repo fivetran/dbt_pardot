@@ -3,7 +3,7 @@
     enabled=var('fivetran_validation_tests_enabled', false)
 ) }}
 
-{% set exclude_cols = var('consistency_test_exclude_metrics', ['sum_opportunity_amount_lost', 'sum_opportunity_amount_won', 'sum_opportunity_amount_open']) %}
+{% set exclude_cols = var('consistency_test_exclude_metrics', []) + ['sum_opportunity_amount_lost', 'sum_opportunity_amount_won', 'sum_opportunity_amount_open']) %}
 
 -- this test ensures the pardot__campaigns end model matches the prior version
 with prod as (
