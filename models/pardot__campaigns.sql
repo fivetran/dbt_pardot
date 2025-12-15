@@ -1,4 +1,4 @@
-{% set statuses = dbt_utils.get_column_values(table=ref('int__opportunity_tmp'), column='opportunity_status') %} 
+{% set statuses = dbt_utils.get_column_values(table=ref('int__opportunity_tmp'), column='opportunity_status') if execute and flags.WHICH in ('run', 'build') else [] %} 
 
 with opportunities_tmp as (
     select * 
@@ -6,21 +6,20 @@ with opportunities_tmp as (
     
 ), opportunities as ( 
     select 
-        source_relation, campaign_id, 
-        count(*) as count_opportunities, 
+        source_relation, campaign_id,
+        count(*) as count_opportunities
     
         {% for status in statuses %} 
-        count(case when opportunity_status = '{{ status }}' then 1 end) as count_opportunities_{{ status|lower|replace(' ','_') }}, 
-        sum(case when opportunity_status = '{{ status }}' then amount end) as sum_opportunity_amount_{{ status|lower|replace(' ','_') }} 
-        {% if not loop.last %} , {% endif %} 
+        , count(case when opportunity_status = '{{ status }}' then 1 end) as count_opportunities_{{ status|lower|replace(' ','_') }}
+        , sum(case when opportunity_status = '{{ status }}' then amount end) as sum_opportunity_amount_{{ status|lower|replace(' ','_') }} 
         {% endfor %} 
     from opportunities_tmp 
     group by 1, 2 
     
 ), campaigns as ( 
-     select * 
-     from {{ ref('stg_pardot__campaign') }} 
-     
+    select * 
+    from {{ ref('stg_pardot__campaign') }} 
+
 ), prospects as ( 
     select * 
     from {{ ref('stg_pardot__prospect') }} 
