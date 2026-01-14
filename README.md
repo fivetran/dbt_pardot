@@ -1,4 +1,5 @@
-# Pardot dbt Package ([Docs](https://fivetran.github.io/dbt_pardot/))
+<!--section="pardot_transformation_model"-->
+# Pardot dbt Package
 
 <p align="left">
     <a alt="License"
@@ -15,46 +16,71 @@
         <img src="https://img.shields.io/badge/Fivetran_Quickstart_Compatible%3F-yes-green.svg" /></a>
 </p>
 
+This dbt package transforms data from Fivetran's Pardot connector into analytics-ready tables.
+
+## Resources
+
+- Number of materialized models¹: 21
+- Connector documentation
+  - [Pardot connector documentation](https://fivetran.com/docs/connectors/applications/pardot)
+  - [Pardot ERD](https://fivetran.com/docs/connectors/applications/pardot#schemainformation)
+- dbt package documentation
+  - [GitHub repository](https://github.com/fivetran/dbt_pardot)
+  - [dbt Docs](https://fivetran.github.io/dbt_pardot/#!/overview)
+  - [DAG](https://fivetran.github.io/dbt_pardot/#!/overview?g_v=1)
+  - [Changelog](https://github.com/fivetran/dbt_pardot/blob/main/CHANGELOG.md)
+
 ## What does this dbt package do?
-- Produces modeled tables that leverage Pardot data from [Fivetran's connector](https://fivetran.com/docs/applications/pardot) in the format described by [this ERD](https://fivetran.com/docs/applications/pardot#schemainformation).
-- Enables you to better understand your Pardot prospects, opportunities, lists, and campaign performance.
-- Generates a comprehensive data dictionary of your source and modeled Pardot data through the [dbt docs site](https://fivetran.github.io/dbt_pardot/#!/overview).
+This package enables you to better understand your Pardot prospects, opportunities, lists, and campaign performance. It creates enriched models with metrics focused on prospect activity and campaign effectiveness.
 
-<!--section=“pardot_transformation_model"-->
-The following table provides a detailed list of all tables materialized within this package by default.
-> TIP: See more details about these tables in the package's [dbt docs site](https://fivetran.github.io/dbt_pardot/#!/overview?g_v=1).
+### Output schema
+Final output tables are generated in the following target schema:
 
-| **Table**                | **Description**                                                                                                     |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------- |
-| [pardot__campaigns](https://fivetran.github.io/dbt_pardot/#!/model/model.pardot.pardot__campaigns)         | Each record represents a campaign in Pardot, enriched with metrics about associated prospects.                      |
-| [pardot__lists](https://fivetran.github.io/dbt_pardot/#!/model/model.pardot.pardot__lists)            | Each record represents a list in Pardot, enriched with metrics about associated prospect activity.                  |
-| [pardot__opportunities](https://fivetran.github.io/dbt_pardot/#!/model/model.pardot.pardot__opportunities)    | Each record represents an opportunity in Pardot, enriched with metrics about associated prospects.                   |
-| [pardot__prospects](https://fivetran.github.io/dbt_pardot/#!/model/model.pardot.pardot__prospects)        | Each record represents a prospect in Pardot, enriched with metrics about associated prospect activity.             |
+```
+<your_database>.<connector/schema_name>_pardot
+```
 
-### Materialized Models
-Each Quickstart transformation job run materializes 21 models if all components of this data model are enabled. This count includes all staging, intermediate, and final models materialized as `view`, `table`, or `incremental`.
-<!--section-end-->
+### Final output tables
 
-## How do I use the dbt package?
+By default, this package materializes the following final tables:
 
-### Step 1: Prerequisites
+| Table | Description |
+| :---- | :---- |
+| [pardot__campaigns](https://fivetran.github.io/dbt_pardot/#!/model/model.pardot.pardot__campaigns) | Each record represents a Pardot campaign enriched with aggregated metrics including prospect counts, opportunity counts by status (won/lost), and opportunity amounts by status to measure campaign performance and revenue impact. <br></br>**Example Analytics Questions:**<ul><li>Which campaigns have the highest count_opportunities_won and sum_opportunity_amount_won?</li><li>How does campaign cost compare to sum_opportunity_amount_won for ROI analysis?</li><li>Which campaigns have the most count_prospects but low count_opportunities_won (indicating conversion issues)?</li></ul>|
+| [pardot__lists](https://fivetran.github.io/dbt_pardot/#!/model/model.pardot.pardot__lists) | Each record represents a Pardot list enriched with aggregated activity metrics from list members including email activity counts, visit activity counts, and timestamps of most recent activities to measure list engagement levels. <br></br>**Example Analytics Questions:**<ul><li>Which lists have the highest count_activity_emails and count_activity_visits from their members?</li><li>How do is_dynamic lists compare to static lists in terms of count_activity_emails and member engagement?</li><li>Which lists have the most recent most_recent_email_activity_timestamp or most_recent_visit_activity_timestamp indicating active engagement?</li></ul>|
+| [pardot__opportunities](https://fivetran.github.io/dbt_pardot/#!/model/model.pardot.pardot__opportunities) | Each record represents a Pardot opportunity enriched with the count of associated prospects to connect sales pipeline data with prospect relationships and track opportunity value and progression. <br></br>**Example Analytics Questions:**<ul><li>Which opportunities have the highest amount and probability with the most count_prospects?</li><li>How does count_prospects correlate with opportunity_status (won vs lost) and amount?</li><li>What is the time between created_timestamp and closed_timestamp for opportunities by campaign_id and stage?</li></ul>|
+| [pardot__prospects](https://fivetran.github.io/dbt_pardot/#!/model/model.pardot.pardot__prospects) | Each record represents a Pardot prospect enriched with aggregated activity metrics including email activity counts, visit activity counts, and configurable activity type metrics to analyze prospect engagement and lead quality. <br></br>**Example Analytics Questions:**<ul><li>Which prospects have the highest score and grade with the most count_activity_emails and count_activity_visits?</li><li>How does opted_out or is_do_not_email status correlate with most_recent_email_activity_timestamp and engagement levels?</li><li>What prospects have recent most_recent_visit_activity_timestamp but low count_activity_emails indicating sales follow-up opportunities?</li></ul>|
+
+¹ Each Quickstart transformation job run materializes these models if all components of this data model are enabled. This count includes all staging, intermediate, and final models materialized as `view`, `table`, or `incremental`.
+
+---
+
+## Prerequisites
 To use this dbt package, you must have the following:
 
 - At least one Fivetran Pardot connection syncing data into your destination.
 - A **BigQuery**, **Snowflake**, **Redshift**, **PostgreSQL**, or **Databricks** destination.
 
-### Step 2: Install the package
+## How do I use the dbt package?
+You can either add this dbt package in the Fivetran dashboard or import it into your dbt project:
+
+- To add the package in the Fivetran dashboard, follow our [Quickstart guide](https://fivetran.com/docs/transformations/dbt).
+- To add the package to your dbt project, follow the setup instructions in the dbt package's [README file](https://github.com/fivetran/dbt_pardot/blob/main/README.md#how-do-i-use-the-dbt-package) to use this package.
+
+<!--section-end-->
+
+### Install the package
 Include the following pardot package version in your `packages.yml` file:
 > TIP: Check [dbt Hub](https://hub.getdbt.com/) for the latest installation instructions or [read the dbt docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
 
 ```yaml
 packages:
   - package: fivetran/pardot
-    version: [">=1.2.0", "<1.3.0"]
+    version: [">=1.3.0", "<1.4.0"]
 ```
 > All required sources and staging models are now bundled into this transformation package. Do not include `fivetran/pardot_source` in your `packages.yml` since this package has been deprecated.
 
-### Step 3: Define database and schema variables
+### Define database and schema variables
 
 #### Option A: Single connection
 By default, this package runs using your [destination](https://docs.getdbt.com/docs/running-a-dbt-project/using-the-command-line-interface/configure-your-profile) and the `pardot` schema. If this is not where your Pardot data is (for example, if your Pardot schema is named `pardot_fivetran`), add the following configuration to your root `dbt_project.yml` file:
@@ -113,7 +139,7 @@ sources:
     tables: # copy and paste from pardot/models/staging/src_pardot.yml - see https://support.atlassian.com/bitbucket-cloud/docs/yaml-anchors/ for how to use anchors to only do so once
 ```
 
-> **Note**: If there are source tables you do not have (see [Step 4](#optional-step-4-additional-configurations)), you may still include them, as long as you have set the right variables to `False`.
+> **Note**: If there are source tables you do not have (see [Additional configurations](#optional-additional-configurations)), you may still include them, as long as you have set the right variables to `False`.
 
 2. Set the `has_defined_sources` variable (scoped to the `pardot` package) to `True`, like such:
 ```yml
@@ -123,7 +149,7 @@ vars:
     has_defined_sources: true
 ```
 
-### (Optional) Step 4: Additional configurations
+### (Optional) Additional configurations
 <details open><summary>Expand/Collapse details</summary>
 
 #### Passthrough Columns
@@ -167,7 +193,7 @@ vars:
 ```
 </details>
 
-### (Optional) Step 6: Orchestrate your models with Fivetran Transformations for dbt Core™
+### (Optional) Orchestrate your models with Fivetran Transformations for dbt Core™
 <details><summary>Expand to view details</summary>
 <br>
 
@@ -188,14 +214,18 @@ packages:
 
 ```
 
+<!--section="pardot_maintenance"-->
 ## How is this package maintained and can I contribute?
+
 ### Package Maintenance
-The Fivetran team maintaining this package _only_ maintains the latest version of the package. We highly recommend you stay consistent with the [latest version](https://hub.getdbt.com/fivetran/pardot/latest/) of the package and refer to the [CHANGELOG](https://github.com/fivetran/dbt_pardot/blob/main/CHANGELOG.md) and release notes for more information on changes across versions.
+The Fivetran team maintaining this package only maintains the [latest version](https://hub.getdbt.com/fivetran/pardot/latest/) of the package. We highly recommend you stay consistent with the latest version of the package and refer to the [CHANGELOG](https://github.com/fivetran/dbt_pardot/blob/main/CHANGELOG.md) and release notes for more information on changes across versions.
 
 ### Contributions
 A small team of analytics engineers at Fivetran develops these dbt packages. However, the packages are made better by community contributions.
 
-We highly encourage and welcome contributions to this package. Check out [this dbt Discourse article](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657) on the best workflow for contributing to a package.
+We highly encourage and welcome contributions to this package. Learn how to contribute to a package in dbt's [Contributing to an external dbt package article](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657).
+
+<!--section-end-->
 
 ## Are there any resources available?
 - If you have questions or want to reach out for help, see the [GitHub Issue](https://github.com/fivetran/dbt_pardot/issues/new/choose) section to find the right avenue of support for you.
