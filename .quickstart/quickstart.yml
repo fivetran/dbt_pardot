@@ -19,6 +19,6 @@ public_models: [
 supported_vars:
   prospect_passthrough_columns:
     type: list
-    description: "Addtional `PROSPECT` columns to include in `pardot__prospects`"
+    description: "Additional `PROSPECT` columns to include in `pardot__prospects`"
     display_name: "Additional Prospect Columns"
 
