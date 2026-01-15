@@ -6,8 +6,7 @@
 - Updates README with standardized Fivetran formatting.
 
 ## Under the Hood
-- In the `quickstart.yml` file:
-  - Adds `table_variables` for relevant sources to prevent missing sources from blocking downstream Quickstart models.
+- In the `quickstart.yml` file: 
   - Adds `supported_vars` for Quickstart UI customization.
 
 # dbt_pardot v1.2.1
