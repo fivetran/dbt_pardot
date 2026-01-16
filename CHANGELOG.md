@@ -1,3 +1,14 @@
+# dbt_pardot v1.3.0
+
+[PR #29](https://github.com/fivetran/dbt_pardot/pull/29) includes the following updates:
+
+## Documentation
+- Updates README with standardized Fivetran formatting.
+
+## Under the Hood
+- In the `quickstart.yml` file: 
+  - Adds `supported_vars` for Quickstart UI customization.
+
 # dbt_pardot v1.2.1
 
 [PR #27](https://github.com/fivetran/dbt_pardot/pull/27) introduces the following update:

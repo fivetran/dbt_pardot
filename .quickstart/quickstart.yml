@@ -15,3 +15,14 @@ public_models: [
   "pardot__campaigns",
   "pardot__lists"
 ]
+
+supported_vars:
+  prospect_passthrough_columns:
+    type: list
+    description: "Additional `PROSPECT` columns to include in `pardot__prospects`"
+    display_name: "Additional Prospect Columns"
+
+  prospect_metrics_activity_types:
+    type: list
+    description: "Additional `VISITOR_ACTIVITY.type_name` activities to aggregate into metrics in `pardot__prospects`"
+    display_name: "Aggregated Vistor Activity Types"
