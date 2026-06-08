@@ -1,3 +1,11 @@
+# dbt_pardot v1.4.0
+
+[PR #32](https://github.com/fivetran/dbt_pardot/pull/32) includes the following updates:
+
+## Under the Hood
+- Migrates the `union_connections`, `apply_source_relation`, and `partition_by_source_relation` macros to the `dbt_fivetran_utils` package.
+- Adds the `fivetran_using_source_casing` variable for case-sensitive destination support. When enabled, downstream transformations respect source casing to ensure consistent results. See the [Additional Configurations](https://github.com/fivetran/dbt_pardot/#source-casing-for-case-sensitive-destinations) section of the README for details.
+
 # dbt_pardot v1.3.0
 
 [PR #29](https://github.com/fivetran/dbt_pardot/pull/29) includes the following updates:
