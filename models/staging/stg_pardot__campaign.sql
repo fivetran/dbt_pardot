@@ -15,7 +15,7 @@ fields as (
                 staging_columns=get_campaign_columns()
             )
         }}
-        {{ pardot.apply_source_relation() }}
+        {{ fivetran_utils.apply_source_relation(package_name='pardot') }}
 
     from base
     where not coalesce(_fivetran_deleted, false)
