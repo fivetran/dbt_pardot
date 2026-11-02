@@ -1,3 +1,10 @@
+# dbt_pardot v1.4.2
+
+[PR #37](https://github.com/fivetran/dbt_pardot/pull/37) includes the following updates:
+
+## Under the Hood
+- Moves the `view` materialization for `int__opportunity_tmp` from the model file to `dbt_project.yml`. The model still builds as a view, and you can override its materialization from your root `dbt_project.yml`, for example to a table on destinations that don't support views.
+
 # dbt_pardot v1.4.1
 
 [PR #34](https://github.com/fivetran/dbt_pardot/pull/34) includes the following updates:
