@@ -3,6 +3,12 @@ version: 2
 models:
   - name: pardot__campaigns
     description: Each record represents a campaign in Pardot
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - campaign_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -33,6 +39,12 @@ models:
 
   - name: pardot__lists
     description: Each record represents a list in Pardot.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - list_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -69,6 +81,12 @@ models:
 
   - name: pardot__opportunities
     description: Each record represents an opportunity in Pardot.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - opportunity_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -103,6 +121,12 @@ models:
 
   - name: pardot__prospects
     description: Each record in the table represents a prospect in Pardot.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - prospect_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
