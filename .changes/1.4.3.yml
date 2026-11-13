@@ -5,3 +5,4 @@ under_the_hood:
     documentation. The model does not produce this column, so the documentation listed
     a field you cannot query. This also removes the related `persist_docs` warning
     from your dbt runs.
+date: '2026-11-13'
