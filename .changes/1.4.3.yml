@@ -1,4 +1,5 @@
 version: 1.4.3
+pr_number: 39
 under_the_hood:
 - description: Removes the `count_opportunities` column from the [pardot__campaigns](https://fivetran.github.io/dbt_pardot/#!/model/model.pardot.pardot__campaigns)
     documentation. The model does not produce this column, so the documentation listed
