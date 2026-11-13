@@ -4,6 +4,12 @@ models:
 
   - name: stg_pardot__list
     description: Each record represents a list in Pardot.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - list_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -32,6 +38,12 @@ models:
 
   - name: stg_pardot__list_membership
     description: Every record represents membership of a prospect in a list.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - list_membership_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -54,6 +66,12 @@ models:
 
   - name: stg_pardot__visitor
     description: Each record represents a website visitor.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - visitor_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -88,6 +106,12 @@ models:
 
   - name: stg_pardot__visitor_activity
     description: Each record represents a visitors session on a website.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - visitor_activity_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -114,6 +138,12 @@ models:
 
   - name: stg_pardot__prospect
     description: Each record in the table represents a prospect in Pardot.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - prospect_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -218,6 +248,12 @@ models:
 
   - name: stg_pardot__campaign
     description: Each record represents a campaign in Pardot
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - campaign_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -236,6 +272,12 @@ models:
 
   - name: stg_pardot__opportunity
     description: Each record represents an opportunity in Pardot.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - opportunity_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
