@@ -1,3 +1,10 @@
+# dbt_pardot v1.4.3
+
+[PR #39](https://github.com/fivetran/dbt_pardot/pull/39) includes the following updates:
+
+## Under the Hood
+- Removes the `count_opportunities` column from the [pardot__campaigns](https://fivetran.github.io/dbt_pardot/#!/model/model.pardot.pardot__campaigns) documentation. The model does not produce this column, so the documentation listed a field you cannot query. This also removes the related `persist_docs` warning from your dbt runs.
+
 # dbt_pardot v1.4.2
 
 [PR #37](https://github.com/fivetran/dbt_pardot/pull/37) includes the following updates:
