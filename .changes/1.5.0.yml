@@ -4,3 +4,7 @@ new_features:
 - description: Raises the minimum supported dbt version from v1.3.0 to v1.10.0.
 under_the_hood:
 - description: Adds `dbt_utils.unique_combination_of_columns` tests to the staging and end models. The tests use the `arguments` syntax introduced in dbt v1.10.0, the new minimum supported version.
+- description: Removes the `count_opportunities` column from the [pardot__campaigns](https://fivetran.github.io/dbt_pardot/#!/model/model.pardot.pardot__campaigns)
+    documentation. The model does not produce this column, so the documentation listed
+    a field you cannot query. This also removes the related `persist_docs` warning
+    from your dbt runs.
