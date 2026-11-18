@@ -1,3 +1,14 @@
+# dbt_pardot v1.5.0
+
+[PR #38](https://github.com/fivetran/dbt_pardot/pull/38) includes the following updates:
+
+## Feature Update
+- Raises the minimum dbt version to 1.10.0.
+- Adds `dbt_utils.unique_combination_of_columns` tests to staging and end models. If a test fails, please [open an issue](https://github.com/fivetran/dbt_pardot/issues/new/choose).
+
+## Under the Hood
+- Removes the `count_opportunities` column from the [pardot__campaigns](https://fivetran.github.io/dbt_pardot/#!/model/model.pardot.pardot__campaigns) documentation. The model does not produce this column, so the documentation listed a field you cannot query. This also removes the related `persist_docs` warning from your dbt runs.
+
 # dbt_pardot v1.4.2
 
 [PR #37](https://github.com/fivetran/dbt_pardot/pull/37) includes the following updates:
