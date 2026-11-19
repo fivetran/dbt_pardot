@@ -7,7 +7,7 @@
 - Adds `dbt_utils.unique_combination_of_columns` tests to staging and end models. If a test fails, please [open an issue](https://github.com/fivetran/dbt_pardot/issues/new/choose).
 
 ## Under the Hood
-- Removes the `count_opportunities` column from the [pardot__campaigns](https://fivetran.github.io/dbt_pardot/#!/model/model.pardot.pardot__campaigns) documentation. The model does not produce this column, so the documentation listed a field you cannot query. This also removes the related `persist_docs` warning from your dbt runs.
+- Removes the `count_opportunities` column from the `pardot__campaigns` documentation.
 
 # dbt_pardot v1.4.2
 

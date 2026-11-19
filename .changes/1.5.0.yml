@@ -5,5 +5,6 @@ new_features:
 - description: Adds `dbt_utils.unique_combination_of_columns` tests to staging and
     end models. If a test fails, please [open an issue](https://github.com/fivetran/dbt_pardot/issues/new/choose).
 under_the_hood:
-- description: Removes the `count_opportunities` column from the `pardot__campaigns` documentation. 
+- description: Removes the `count_opportunities` column from the `pardot__campaigns`
+    documentation.
 date: '2026-11-18'
