@@ -18,7 +18,7 @@ models:
         description: "{{ doc('_fivetran_synced') }}"
       - name: campaign_id
         description: Pardot ID for this campaign
-        tests:
+        data_tests:
           - not_null
       - name: campaign_name
         description: Campaign's name
@@ -54,7 +54,7 @@ models:
         description: List's description
       - name: list_id
         description: Pardot ID of this list
-        tests:
+        data_tests:
           - not_null
       - name: is_crm_visible
         description: If true, list is visible in CRM to add or remove from
@@ -92,7 +92,7 @@ models:
         description: "{{ doc('_fivetran_synced') }}"
       - name: opportunity_id
         description: Pardot ID for this opportunity
-        tests:
+        data_tests:
           - not_null
       - name: campaign_id
         description: Pardot ID of the campaign associated with this opportunity
@@ -134,7 +134,7 @@ models:
         description: "{{ doc('_fivetran_synced') }}"
       - name: prospect_id
         description: Pardot ID for this prospect
-        tests:
+        data_tests:
           - not_null
       - name: campaign_id
         description: Pardot ID of the campaign associated with this prospect
