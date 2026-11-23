@@ -3,6 +3,12 @@ version: 2
 models:
   - name: pardot__campaigns
     description: Each record represents a campaign in Pardot
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - campaign_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -12,7 +18,7 @@ models:
         description: "{{ doc('_fivetran_synced') }}"
       - name: campaign_id
         description: Pardot ID for this campaign
-        tests:
+        data_tests:
           - not_null
       - name: campaign_name
         description: Campaign's name
@@ -20,8 +26,6 @@ models:
         description: Cost associated to the campaign
       - name: count_prospects
         description: Number of prospects associated with the campaign
-      - name: count_opportunities
-        description: Count of all campaign opportunities
       - name: count_opportunities_won
         description: Count of all campaign opportunities won
       - name: sum_opportunity_amount_won
@@ -33,6 +37,12 @@ models:
 
   - name: pardot__lists
     description: Each record represents a list in Pardot.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - list_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -44,7 +54,7 @@ models:
         description: List's description
       - name: list_id
         description: Pardot ID of this list
-        tests:
+        data_tests:
           - not_null
       - name: is_crm_visible
         description: If true, list is visible in CRM to add or remove from
@@ -69,6 +79,12 @@ models:
 
   - name: pardot__opportunities
     description: Each record represents an opportunity in Pardot.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - opportunity_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -76,7 +92,7 @@ models:
         description: "{{ doc('_fivetran_synced') }}"
       - name: opportunity_id
         description: Pardot ID for this opportunity
-        tests:
+        data_tests:
           - not_null
       - name: campaign_id
         description: Pardot ID of the campaign associated with this opportunity
@@ -103,6 +119,12 @@ models:
 
   - name: pardot__prospects
     description: Each record in the table represents a prospect in Pardot.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - source_relation
+              - prospect_id
     columns:
       - name: source_relation
         description: "{{ doc('source_relation') }}"
@@ -112,7 +134,7 @@ models:
         description: "{{ doc('_fivetran_synced') }}"
       - name: prospect_id
         description: Pardot ID for this prospect
-        tests:
+        data_tests:
           - not_null
       - name: campaign_id
         description: Pardot ID of the campaign associated with this prospect
